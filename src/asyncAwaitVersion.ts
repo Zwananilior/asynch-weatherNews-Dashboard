@@ -1,6 +1,6 @@
 import axios from 'axios';
 
- function getWeather() {
+ async function getWeather() {
   return axios.get('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true');
 }
 
@@ -8,12 +8,12 @@ async function getNews() {
   return axios.get('https://dummyjson.com/posts');
 }
 
-asyncfunction main() {
+async function main() {
   try {
     const weather = await getWeather();
     console.log('Weather:', weather.data.current_weather);
 
-    const news =  getNews();
+    const news =  await getNews();
     console.log('News:', news.data.posts.slice(0, 3));
 
     const [weatherAll, newsAll] = await Promise.all([getWeather(), getNews()]);
